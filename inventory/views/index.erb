@@ -1,0 +1,59 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <style type="text/css">
+    .accordion-wrapper {
+      width: 300px;
+    }
+
+    .accordion-wrapper h3 {
+      margin: 2px;
+      padding: 10px 0;
+      background-color: #096c47;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .accordion-wrapper p {
+      margin-top: 10px;
+      padding: 0 10px;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .add {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Responses</h1>
+  <% @routes.each do |r| %>
+    <div class="accordion-wrapper">
+      <h3>
+        <%= "#{r.http_method.upcase} /#{r.endpoint}" %>
+      </h3>
+      <p class="hide">
+        <%= r.req.to_json %>
+      </p>
+    </div>
+  <% end %>
+
+
+  <script>
+    let menu = document.getElementsByTagName('h3');
+    function show(){
+      let hideContent = this.nextElementSibling;
+      hideContent.classList.toggle('hide');
+    };
+    for(let i = 0; i < menu.length; i++){
+      menu[i].addEventListener('click', show)
+    }
+  </script>
+</body>
+</html>

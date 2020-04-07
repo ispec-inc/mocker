@@ -1,0 +1,7 @@
+routes:
+  questions:
+    - get
+    - post
+  user:
+    - get
+    - patch
