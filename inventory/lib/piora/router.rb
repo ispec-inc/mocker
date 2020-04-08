@@ -1,4 +1,4 @@
-class Mocker::Router
+class Piora::Router
   require 'hashie'
   attr_reader :endpoint, :http_method, :json, :req, :res
 

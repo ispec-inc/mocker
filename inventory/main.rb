@@ -3,7 +3,7 @@ require 'pry'
 
 Dir[File.dirname(__FILE__) + '/lib/**/*'].each {|file| require file }
 
-routes = Mocker::Router.routes
+routes = Piora::Router.routes
 
 routes.each do |route|
   eval <<-"TEXT"

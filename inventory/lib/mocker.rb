@@ -1,2 +1,0 @@
-class Mocker
-end
