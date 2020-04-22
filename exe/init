@@ -1,0 +1,13 @@
+#!ruby
+
+require 'fileutils'
+Dir[File.expand_path('../lib', __FILE__) << '/**/*.rb'].each(&method(:require))
+
+dir = "config/"
+file = "#{dir}/routes.yml"
+
+return if File.exist? file
+
+FileUtils.mkdir_p(dir)
+FileUtils.touch(file)
+File.write(file, "routes:", {mode: "a"})
