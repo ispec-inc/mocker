@@ -1,0 +1,3 @@
+module MocMock
+
+end

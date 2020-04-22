@@ -1,21 +1,35 @@
 require 'sinatra'
+require 'sinatra/json'
+require "sinatra/cors"
 require 'pry'
 
-Dir[File.dirname(__FILE__) + '/lib/**/*'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/lib/**/*'].each(&method(:require))
 
-routes = Piora::Router.routes
+routes = MocMock::Router.routes
+
+set :allow_origin, "http://localhost:4200"
+set :allow_methods, "GET,HEAD,POST,PATCH,DELETE"
+set :allow_headers, "content-type,if-modified-since"
+set :expose_headers, "location,link"
+
+helpers do
+  def prettry_json(str)
+    MocMock::ViewHelper.prettry_json(str)
+  end
+end
 
 routes.each do |route|
-  eval <<-"TEXT"
-    #{route.http_method} '/#{route.endpoint}' do
+  eval <<~"EOS"
+    #{route.http_method} '#{route.path_for_sinatra}' do
       content_type :json
 
-      #{route.json}
+      json(#{route.res}, encoder: :to_json)
     end
-  TEXT
+  EOS
 end
 
 get '/' do
   @routes = routes
   erb :index
 end
+
