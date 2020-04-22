@@ -1,0 +1,6 @@
+#!ruby
+require_relative "../lib/mocmock.rb"
+
+dir = ARGV[0] || "."
+
+MocMock.init dir
