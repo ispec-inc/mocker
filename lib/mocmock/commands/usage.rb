@@ -3,13 +3,10 @@ module MocMock
     class Usage
       def self.exec(*args)
         puts "New:"
-        puts "  create new project"
+        puts "  - Create new project"
         puts "  mocmock new [PROJECT_NAME]"
-        puts "Init:"
-        puts "  initialize a project"
-        puts "  mocmock init"
         puts "Load:"
-        puts "  load the yaml file"
+        puts "  - Load routings and create jsons"
         puts "  mocmock load"
       end
     end
