@@ -27,3 +27,8 @@ jsons
     ├── get.json
     └── patch.json
 ```
+
+## Run MockServer
+```
+$ ruby main.rb
+```
