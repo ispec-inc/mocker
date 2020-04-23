@@ -6,7 +6,6 @@ module MocMock
   class Error < StandardError; end
   COMMAND_LIST = %w(
     new
-    init
     load
   )
 
@@ -23,13 +22,12 @@ module MocMock
       klass = begin
         case command
         when "new" then MocMock::Commands::New
-        when "init" then MocMock::Commands::Init
         when "load" then MocMock::Commands::Load
         else MocMock::Commands::Usage
         end
       end
 
-      klass.exec(arg)
+      klass.exec(*arg)
     end
 
     private
