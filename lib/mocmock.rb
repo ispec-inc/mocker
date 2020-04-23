@@ -1,6 +1,9 @@
-require_relative "./mocmock/version"
-Dir['./lib/mocmock/commands/**/*'].each(&method(:require))
+require "pathname"
 require 'fileutils'
+require 'pry'
+
+require_relative "./mocmock/version"
+Pathname.glob('./lib/mocmock/**/*.rb').each(&method(:require))
 
 module MocMock
   class Error < StandardError; end
