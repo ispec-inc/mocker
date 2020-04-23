@@ -2,7 +2,7 @@ require "pathname"
 require 'fileutils'
 require 'pry'
 
-require_relative "./mocmock/version"
+require "./lib//mocmock/version"
 Pathname.glob('./lib/mocmock/**/*.rb').each(&method(:require))
 
 module MocMock
