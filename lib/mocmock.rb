@@ -1,18 +1,41 @@
 require_relative "./mocmock/version"
+Dir['./lib/mocmock/commands/**/*'].each(&method(:require))
 require 'fileutils'
 
 module MocMock
   class Error < StandardError; end
-  INVENTORY= "inventory"
+  COMMAND_LIST = %w(
+    new
+    init
+    load
+  )
 
-  def self.init(dir)
-    FileUtils.mkdir_p(dir)
+  class << self
+    def command(args)
+      command, *arg = args
 
-    Dir.glob("#{INVENTORY}/**/*").each do |f|
-      nf = f.sub(INVENTORY, "")
-      File.ftype(f) == "file" ?
-        FileUtils.cp(f, "#{dir}/#{nf}") :
-        FileUtils.mkdir_p("#{dir}/#{nf}")
+      is_valid = valid_command(command)
+      unless is_valid
+        MocMock::Commands::Usage.exec
+        return
+      end
+
+      klass = begin
+        case command
+        when "new" then MocMock::Commands::New
+        when "init" then MocMock::Commands::Init
+        when "load" then MocMock::Commands::Load
+        else MocMock::Commands::Usage
+        end
+      end
+
+      klass.exec(arg)
+    end
+
+    private
+
+    def valid_command(command)
+      COMMAND_LIST.include? command
     end
   end
 end

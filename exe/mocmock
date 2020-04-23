@@ -1,0 +1,5 @@
+#!ruby
+require_relative "../lib/mocmock.rb"
+Dir[File.expand_path('../lib', __FILE__) << '/**/*.rb'].each(&method(:require))
+
+MocMock.command ARGV
