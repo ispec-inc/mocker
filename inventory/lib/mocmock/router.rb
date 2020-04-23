@@ -22,7 +22,10 @@ module MocMock
     class << self
       def routes
         route_file = "config/routes.yml"
-        return unless File.exists? route_file
+        unless File.exists? route_file
+          puts "Cannot file 'config/routes.yml'"
+          return
+        end
 
         endpoints = YAML.load_file(route_file)
 
