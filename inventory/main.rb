@@ -1,13 +1,12 @@
 require 'sinatra'
 require 'sinatra/json'
 require "sinatra/cors"
-require 'pry'
 
 Dir[File.dirname(__FILE__) + '/lib/**/*'].each(&method(:require))
 
 routes = MocMock::Router.routes
 
-set :allow_origin, "http://localhost:4200"
+set :allow_origin, "*"
 set :allow_methods, "GET,HEAD,POST,PATCH,DELETE"
 set :allow_headers, "content-type,if-modified-since"
 set :expose_headers, "location,link"
