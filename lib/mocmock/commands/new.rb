@@ -10,7 +10,7 @@ module MocMock
         lib/mocmock
         config
         jsons
-        view
+        views
       )
 
       Files = %w(
