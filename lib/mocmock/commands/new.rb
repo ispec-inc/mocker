@@ -35,7 +35,7 @@ module MocMock
           end
 
           Files.each do |f|
-            uri = URI.parse "#{URL}/#{f}"
+            uri = URI.parse "#{BaseUrl}/#{f}"
             str = Net::HTTP.get_response(uri)
 
             File.open("#{dir}/#{f}", "w"){ |file| file.puts str }
