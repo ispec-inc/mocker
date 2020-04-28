@@ -1,26 +1,56 @@
+require 'net/http'
+require 'uri'
+
 module MocMock
   module Commands
     class New
-      INVENTORY = "inventory"
+      BaseUrl = "https://raw.githubusercontent.com/ispec-inc/mocmock/master/inventory"
+      Directories = %w(
+        lib
+        lib/mocmock
+        config
+        view
+      )
 
-      def self.exec(*args)
-        dir = args[0]
+      Files = %w(
+        main.rb
+        Gemfile
+        lib/mocmock.rb
+        lib/mocmock/router.rb
+        lib/mocmock/view_helper.rb
+        config/routes.yml
+        view/index.erb
+      )
 
-        if dir.nil?
+      class << self
+        def exec(*args)
+          dir = args[0]
+          if dir.nil?
+            puts_usage
+            return
+          end
+
+          Directories.each do |d|
+            FileUtils.mkdir_p("#{dir}/#{d}")
+          end
+
+          Files.each do |f|
+            uri = URI.parse "#{URL}/#{f}"
+            str = Net::HTTP.get_response(uri)
+
+            File.open("#{dir}/#{f}", "w"){ |file| file.puts str }
+          end
+
+        end
+
+        private
+
+        def puts_usage
           puts "ERROR:"
           puts "  Give Project name"
           puts
           puts "USAGE:"
           puts "  mocmock new [PROJECT_NAME]"
-          return
-        end
-
-        Dir.glob("#{INVENTORY}/**/*").each do |f|
-          new_file = f.sub(INVENTORY, "")
-
-          File.ftype(f) == "file" ?
-            FileUtils.cp(f, "#{dir}/#{new_file}") :
-            FileUtils.mkdir_p("#{dir}/#{new_file}")
         end
       end
     end
