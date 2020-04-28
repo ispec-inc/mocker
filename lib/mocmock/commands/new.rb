@@ -36,11 +36,12 @@ module MocMock
 
           Files.each do |f|
             uri = URI.parse "#{BaseUrl}/#{f}"
-            str = Net::HTTP.get_response(uri)
+            str = Net::HTTP.get_response(uri).body rescue nil
 
             File.open("#{dir}/#{f}", "w"){ |file| file.puts str }
           end
 
+          puts "Project Created"
         end
 
         private
