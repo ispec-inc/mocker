@@ -31,7 +31,7 @@ module MocMock
 
         endpoints = YAML.load_file(route_file)
 
-        unless endpoints.keys?("routes")
+        unless endpoints.key? "routes"
           puts "routes need root key `routes`"
           return []
         end
