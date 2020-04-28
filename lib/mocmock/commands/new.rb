@@ -9,6 +9,7 @@ module MocMock
         lib
         lib/mocmock
         config
+        jsons
         view
       )
 
@@ -19,7 +20,8 @@ module MocMock
         lib/mocmock/router.rb
         lib/mocmock/view_helper.rb
         config/routes.yml
-        view/index.erb
+        views/index.erb
+        jsons/.gitkeep
       )
 
       class << self
@@ -41,7 +43,7 @@ module MocMock
             File.open("#{dir}/#{f}", "w"){ |file| file.puts str }
           end
 
-          puts "Project Created"
+          puts "Project is Created"
         end
 
         private

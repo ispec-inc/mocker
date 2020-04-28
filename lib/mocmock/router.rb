@@ -1,3 +1,5 @@
+require "yaml"
+
 module MocMock
   class Router
     attr_reader :path_for_sinatra,
