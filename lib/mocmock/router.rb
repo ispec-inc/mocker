@@ -24,8 +24,9 @@ module MocMock
     class << self
       def routes
         route_file = "config/routes.yml"
+
         unless File.exists? route_file
-          puts "Cannot file 'config/routes.yml'"
+          puts "Cannot find 'config/routes.yml'"
           return
         end
 

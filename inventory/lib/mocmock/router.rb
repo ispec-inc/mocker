@@ -1,3 +1,5 @@
+require "yaml"
+
 module MocMock
   class Router
     attr_reader :path_for_sinatra,
@@ -29,8 +31,8 @@ module MocMock
 
         endpoints = YAML.load_file(route_file)
 
-        if endpoints["routes"].nil?
-          puts "yaml need root key `routes`"
+        unless endpoints.keys?("routes")
+          puts "routes need root key `routes`"
           return []
         end
 
