@@ -5,6 +5,7 @@ module MocMock
   module Commands
     class New
       BaseUrl = "https://raw.githubusercontent.com/ispec-inc/mocmock/master/inventory"
+      RouterUrl = "https://raw.githubusercontent.com/ispec-inc/mocmock/master/lib/mocmock/router.rb"
       Directories = %w(
         lib
         lib/mocmock
@@ -34,8 +35,10 @@ module MocMock
             FileUtils.mkdir_p("#{dir}/#{d}")
           end
 
-          Files.each do |f|
-            uri = URI.parse "#{BaseUrl}/#{f}"
+          all_files = Files.map{ |f| "#{BaseUrl}/#{f}" } << RouterUrl
+
+          all_files.each do |f|
+            uri = URI.parse f
             str = Net::HTTP.get_response(uri).body rescue nil
 
             File.open("#{dir}/#{f}", "w"){ |file| file.puts str }
