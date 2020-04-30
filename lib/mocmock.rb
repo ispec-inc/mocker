@@ -35,8 +35,6 @@ module MocMock
       klass.exec(*arg)
     end
 
-    private
-
     def valid_command(command)
       COMMAND_LIST.include? command
     end

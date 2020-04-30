@@ -28,7 +28,7 @@ module MocMock
         def exec(*args)
           dir = args[0]
           if dir.nil?
-            puts_usage
+            MocMock::Commands::Usage.exec(:new)
             return
           end
 
@@ -44,16 +44,6 @@ module MocMock
           end
 
           puts "Project is Created"
-        end
-
-        private
-
-        def puts_usage
-          puts "ERROR:"
-          puts "  Give Project name"
-          puts
-          puts "USAGE:"
-          puts "  mocmock new [PROJECT_NAME]"
         end
       end
     end
