@@ -12,29 +12,24 @@ module MocMock
         private
 
         def puts_usage(command)
-          eval "new.#{command.to_s}"
+          eval "new.#{command}"
         end
       end
 
       def new
-        usage = <<~"EOS"
+        puts <<~"EOS"
         New:
           - Create new project
           mocmock new [PROJECT_NAME]
         EOS
-
-        puts usage
       end
 
       def load
-        usage = <<~"EOS"
+        puts <<~"EOS"
         Load:
           - Load routings and create jsons
           mocmock load
         EOS
-
-        puts usage
-
       end
     end
   end

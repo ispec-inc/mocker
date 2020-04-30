@@ -27,10 +27,8 @@ module MocMock
       class << self
         def exec(*args)
           dir = args[0]
-          if dir.nil?
-            MocMock::Commands::Usage.exec(:new)
-            return
-          end
+
+          MocMock::Commands::Usage.exec :new && return if dir.nil?
 
           Directories.each do |d|
             FileUtils.mkdir_p("#{dir}/#{d}")
