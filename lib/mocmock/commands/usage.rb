@@ -12,7 +12,7 @@ module MocMock
         private
 
         def puts_usage(command)
-          eval "new.#{command}"
+          new.send command
         end
       end
 
